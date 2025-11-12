@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { motion } from 'framer-motion'
 
 const FAQList = () => {
   const [openIndex, setOpenIndex] = useState(null)
@@ -41,48 +42,58 @@ const FAQList = () => {
   }
 
   return (
-    <section className="bg-orange-50 py-20 px-6 md:px-12">
+    <section className="bg-orange-50 py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-12">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 items-start">
           
           {/* LEFT SIDE - Title */}
-          <div className="lg:col-span-1">
-            <div className="bg-gray-300 rounded-3xl p-8 h-full flex items-center justify-center">
-              <h2 className="text-4xl md:text-5xl font-black leading-tight text-gray-900 text-center">
+          <motion.div 
+            className="lg:col-span-1"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="bg-gray-300 rounded-2xl sm:rounded-3xl p-6 sm:p-8 h-full flex items-center justify-center">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black leading-tight text-gray-900 text-center">
                 Answers to important questions
               </h2>
             </div>
-          </div>
+          </motion.div>
 
           {/* RIGHT SIDE - FAQ Accordion */}
           <div className="lg:col-span-2">
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               {faqs.map((faq, index) => (
-                <div
+                <motion.div
                   key={faq.id}
-                  className="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-200"
+                  className="bg-white rounded-xl sm:rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-200"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
                 >
                   <button
                     onClick={() => toggleFAQ(index)}
-                    className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-gray-50 transition-colors duration-200 rounded-2xl"
+                    className="w-full px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between text-left hover:bg-gray-50 transition-colors duration-200 rounded-xl sm:rounded-2xl"
                   >
-                    <h3 className="text-lg font-bold text-gray-900">
+                    <h3 className="text-sm sm:text-base md:text-lg font-bold text-gray-900 pr-2">
                       {faq.question}
                     </h3>
-                    <span className={`shrink-0 text-gray-400 text-2xl transition-transform duration-300 ${openIndex === index ? 'rotate-180' : ''}`}>
+                    <span className={`shrink-0 text-gray-400 text-xl sm:text-2xl transition-transform duration-300 ${openIndex === index ? 'rotate-180' : ''}`}>
                       ▼
                     </span>
                   </button>
 
                   {/* Expandable Answer */}
                   {openIndex === index && (
-                    <div className="px-6 pb-4 pt-0">
-                      <p className="text-gray-700 leading-relaxed">
+                    <div className="px-4 sm:px-6 pb-3 sm:pb-4 pt-0">
+                      <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
                         {faq.answer}
                       </p>
                     </div>
                   )}
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>

@@ -1,4 +1,6 @@
 import React from 'react'
+import { motion } from 'framer-motion'
+import { FaArrowRight } from 'react-icons/fa'
 
 const FeatureList = () => {
   const features = [
@@ -29,47 +31,60 @@ const FeatureList = () => {
   ]
 
   return (
-    <section className="bg-orange-50 py-16 px-6 md:px-12">
+    <section className="bg-orange-50 py-12 sm:py-16 px-4 sm:px-6 md:px-12">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
           
           {/* LEFT SIDE */}
-          <div className="flex flex-col justify-center">
+          <motion.div 
+            className="flex flex-col justify-center"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-full bg-green-700 flex items-center justify-center">
-                <span className="text-white text-lg">→</span>
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-green-700 flex items-center justify-center">
+                <FaArrowRight className="text-white text-base sm:text-lg" />
               </div>
             </div>
-            <h2 className="text-5xl md:text-6xl font-black leading-tight text-gray-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-tight text-gray-900 mb-3 sm:mb-4">
               Built with you in mind
             </h2>
-            <p className="text-lg text-gray-700 leading-relaxed">
+            <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
               The cover you need for wherever you're going. No matter where you started.
             </p>
-          </div>
+          </motion.div>
 
           {/* RIGHT SIDE - Features */}
-          <div className="space-y-8">
-            {features.map((feature) => (
-              <div key={feature.id} className="flex gap-4">
+          <div className="space-y-6 sm:space-y-8">
+            {features.map((feature, index) => (
+              <motion.div 
+                key={feature.id} 
+                className="flex gap-3 sm:gap-4"
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
                 
                 {/* Numbered Circle */}
                 <div className="shrink-0">
-                  <div className="w-12 h-12 rounded-full bg-green-600 flex items-center justify-center">
-                    <span className="text-white font-black text-xl">{feature.number}</span>
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-green-600 flex items-center justify-center">
+                    <span className="text-white font-black text-lg sm:text-xl">{feature.number}</span>
                   </div>
                 </div>
 
                 {/* Content */}
                 <div className="flex-1">
-                  <h3 className="text-2xl font-black text-gray-900 mb-2">
+                  <h3 className="text-xl sm:text-2xl font-black text-gray-900 mb-1 sm:mb-2">
                     {feature.title}
                   </h3>
-                  <p className="text-gray-700 leading-relaxed text-sm md:text-base">
+                  <p className="text-gray-700 leading-relaxed text-sm sm:text-base">
                     {feature.description}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
 

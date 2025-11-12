@@ -1,5 +1,5 @@
 import React from 'react'
-import NavBar from './components/NavBar'
+
 import Hero from './components/Hero'
 import CustomerReview from './components/CustomerReview'
 import FeatureList from './components/FeatureList'
@@ -13,7 +13,7 @@ import Footer from './components/Footer'
 const App = () => {
   return (
     <div>
-      <NavBar/>
+     
       <Hero/>
       <CustomerReview/>
       <FeatureList/>

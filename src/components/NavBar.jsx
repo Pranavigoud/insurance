@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-
+import { motion, AnimatePresence } from "framer-motion";
+import logo from '../assets/logo.png';
 const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -15,34 +16,54 @@ const NavBar = () => {
   ];
 
   return (
-    <nav className="w-full bg-[#f1e9dc] shadow-sm fixed top-0 left-0 z-50">
-      <div className="flex justify-between items-center h-[80px] px-5 md:px-8">
+    <motion.nav 
+      className="w-full bg-[#f1e9dc] shadow-sm fixed top-0 left-0 z-50"
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className="flex justify-between items-center h-20 px-5 md:px-8">
         {/* Logo */}
-        <div className="text-2xl font-bold text-pink-500 cursor-pointer">
-          BeSure
-        </div>
+        <motion.div 
+          className="text-2xl font-bold text-pink-500 cursor-pointer"
+          whileHover={{ scale: 1.05 }}
+        >
+         <img src={logo} alt="Company Logo" className="h-10 w-auto" />
+        </motion.div>
 
         {/* Desktop Menu */}
         <div className="hidden lg:flex gap-6 text-neutral-800 font-medium">
-          {menu.map((item) => (
-            <a
+          {menu.map((item, index) => (
+            <motion.a
               key={item.id}
               href={`#${item.name.toLowerCase().replace(/\s+/g, "-")}`}
               className="hover:text-pink-500 transition-colors"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.05, duration: 0.3 }}
+              whileHover={{ y: -2 }}
             >
               {item.name}
-            </a>
+            </motion.a>
           ))}
         </div>
 
         {/* Buttons */}
         <div className="hidden md:flex gap-4">
-          <button className="bg-neutral-300 hover:bg-neutral-400 px-6 py-2 rounded-full font-medium transition-colors">
+          <motion.button 
+            className="bg-neutral-300 hover:bg-neutral-400 px-6 py-2 rounded-full font-medium transition-colors"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
             Claims
-          </button>
-          <button className="bg-pink-500 hover:bg-pink-600 text-white px-6 py-2 rounded-full font-medium transition-colors">
+          </motion.button>
+          <motion.button 
+            className="bg-pink-500 hover:bg-pink-600 text-white px-6 py-2 rounded-full font-medium transition-colors"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
             Get a Quote
-          </button>
+          </motion.button>
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -55,29 +76,48 @@ const NavBar = () => {
       </div>
 
       {/* Mobile Dropdown */}
-      {menuOpen && (
-        <div className="lg:hidden bg-[#f1e9dc] flex flex-col items-center gap-4 py-6 text-neutral-800 font-medium">
-          {menu.map((item) => (
-            <a
-              key={item.id}
-              href={`#${item.name.toLowerCase().replace(/\s+/g, "-")}`}
-              className="hover:text-pink-500 transition-colors"
-              onClick={() => setMenuOpen(false)}
-            >
-              {item.name}
-            </a>
-          ))}
-          <div className="flex flex-col gap-3 mt-4">
-            <button className="bg-neutral-300 px-6 py-2 rounded-full font-medium">
-              Claims
-            </button>
-            <button className="bg-pink-500 text-white px-6 py-2 rounded-full font-medium">
-              Get a Quote
-            </button>
-          </div>
-        </div>
-      )}
-    </nav>
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div 
+            className="lg:hidden bg-[#f1e9dc] flex flex-col items-center gap-4 py-6 text-neutral-800 font-medium"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            {menu.map((item, index) => (
+              <motion.a
+                key={item.id}
+                href={`#${item.name.toLowerCase().replace(/\s+/g, "-")}`}
+                className="hover:text-pink-500 transition-colors"
+                onClick={() => setMenuOpen(false)}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.05 }}
+              >
+                {item.name}
+              </motion.a>
+            ))}
+            <div className="flex flex-col gap-3 mt-4">
+              <motion.button 
+                className="bg-neutral-300 px-6 py-2 rounded-full font-medium"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Claims
+              </motion.button>
+              <motion.button 
+                className="bg-pink-500 text-white px-6 py-2 rounded-full font-medium"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Get a Quote
+              </motion.button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.nav>
   );
 };
 
