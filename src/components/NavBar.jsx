@@ -93,7 +93,7 @@ const NavBar = () => {
             {menu.map((item, index) => (
               <motion.a
                 key={item.id}
-                href={`#${item.name.toLowerCase().replace(/\s+/g, "-")}`}
+                href={item.path}
                 className="hover:text-pink-500 transition-colors"
                 onClick={() => setMenuOpen(false)}
                 initial={{ opacity: 0, x: -20 }}
