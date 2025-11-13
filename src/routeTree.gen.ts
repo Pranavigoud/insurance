@@ -9,8 +9,62 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VanRouteImport } from './routes/van'
+import { Route as ReferafriendRouteImport } from './routes/referafriend'
+import { Route as OurstoryRouteImport } from './routes/ourstory'
+import { Route as NewtoukRouteImport } from './routes/newtouk'
+import { Route as HelpRouteImport } from './routes/help'
+import { Route as ClaimsRouteImport } from './routes/claims'
+import { Route as CarfinanceRouteImport } from './routes/carfinance'
+import { Route as CarRouteImport } from './routes/car'
+import { Route as BlogRouteImport } from './routes/blog'
 import { Route as IndexRouteImport } from './routes/index'
 
+const VanRoute = VanRouteImport.update({
+  id: '/van',
+  path: '/van',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReferafriendRoute = ReferafriendRouteImport.update({
+  id: '/referafriend',
+  path: '/referafriend',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OurstoryRoute = OurstoryRouteImport.update({
+  id: '/ourstory',
+  path: '/ourstory',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewtoukRoute = NewtoukRouteImport.update({
+  id: '/newtouk',
+  path: '/newtouk',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HelpRoute = HelpRouteImport.update({
+  id: '/help',
+  path: '/help',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClaimsRoute = ClaimsRouteImport.update({
+  id: '/claims',
+  path: '/claims',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CarfinanceRoute = CarfinanceRouteImport.update({
+  id: '/carfinance',
+  path: '/carfinance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CarRoute = CarRouteImport.update({
+  id: '/car',
+  path: '/car',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +73,158 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/blog': typeof BlogRoute
+  '/car': typeof CarRoute
+  '/carfinance': typeof CarfinanceRoute
+  '/claims': typeof ClaimsRoute
+  '/help': typeof HelpRoute
+  '/newtouk': typeof NewtoukRoute
+  '/ourstory': typeof OurstoryRoute
+  '/referafriend': typeof ReferafriendRoute
+  '/van': typeof VanRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/blog': typeof BlogRoute
+  '/car': typeof CarRoute
+  '/carfinance': typeof CarfinanceRoute
+  '/claims': typeof ClaimsRoute
+  '/help': typeof HelpRoute
+  '/newtouk': typeof NewtoukRoute
+  '/ourstory': typeof OurstoryRoute
+  '/referafriend': typeof ReferafriendRoute
+  '/van': typeof VanRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/blog': typeof BlogRoute
+  '/car': typeof CarRoute
+  '/carfinance': typeof CarfinanceRoute
+  '/claims': typeof ClaimsRoute
+  '/help': typeof HelpRoute
+  '/newtouk': typeof NewtoukRoute
+  '/ourstory': typeof OurstoryRoute
+  '/referafriend': typeof ReferafriendRoute
+  '/van': typeof VanRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/blog'
+    | '/car'
+    | '/carfinance'
+    | '/claims'
+    | '/help'
+    | '/newtouk'
+    | '/ourstory'
+    | '/referafriend'
+    | '/van'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/blog'
+    | '/car'
+    | '/carfinance'
+    | '/claims'
+    | '/help'
+    | '/newtouk'
+    | '/ourstory'
+    | '/referafriend'
+    | '/van'
+  id:
+    | '__root__'
+    | '/'
+    | '/blog'
+    | '/car'
+    | '/carfinance'
+    | '/claims'
+    | '/help'
+    | '/newtouk'
+    | '/ourstory'
+    | '/referafriend'
+    | '/van'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BlogRoute: typeof BlogRoute
+  CarRoute: typeof CarRoute
+  CarfinanceRoute: typeof CarfinanceRoute
+  ClaimsRoute: typeof ClaimsRoute
+  HelpRoute: typeof HelpRoute
+  NewtoukRoute: typeof NewtoukRoute
+  OurstoryRoute: typeof OurstoryRoute
+  ReferafriendRoute: typeof ReferafriendRoute
+  VanRoute: typeof VanRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/van': {
+      id: '/van'
+      path: '/van'
+      fullPath: '/van'
+      preLoaderRoute: typeof VanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/referafriend': {
+      id: '/referafriend'
+      path: '/referafriend'
+      fullPath: '/referafriend'
+      preLoaderRoute: typeof ReferafriendRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ourstory': {
+      id: '/ourstory'
+      path: '/ourstory'
+      fullPath: '/ourstory'
+      preLoaderRoute: typeof OurstoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/newtouk': {
+      id: '/newtouk'
+      path: '/newtouk'
+      fullPath: '/newtouk'
+      preLoaderRoute: typeof NewtoukRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/help': {
+      id: '/help'
+      path: '/help'
+      fullPath: '/help'
+      preLoaderRoute: typeof HelpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/claims': {
+      id: '/claims'
+      path: '/claims'
+      fullPath: '/claims'
+      preLoaderRoute: typeof ClaimsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/carfinance': {
+      id: '/carfinance'
+      path: '/carfinance'
+      fullPath: '/carfinance'
+      preLoaderRoute: typeof CarfinanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/car': {
+      id: '/car'
+      path: '/car'
+      fullPath: '/car'
+      preLoaderRoute: typeof CarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +237,15 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BlogRoute: BlogRoute,
+  CarRoute: CarRoute,
+  CarfinanceRoute: CarfinanceRoute,
+  ClaimsRoute: ClaimsRoute,
+  HelpRoute: HelpRoute,
+  NewtoukRoute: NewtoukRoute,
+  OurstoryRoute: OurstoryRoute,
+  ReferafriendRoute: ReferafriendRoute,
+  VanRoute: VanRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -1,18 +1,20 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from '../assets/logo.png';
 const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const menu = [
-    { id: 1, name: "New to the UK?" },
-    { id: 2, name: "Car" },
-    { id: 3, name: "Van" },
-    { id: 4, name: "Car finance" },
-    { id: 5, name: "Our story" },
-    { id: 6, name: "Refer a friend" },
-    { id: 7, name: "Blog" },
-    { id: 8, name: "Help" },
+    { id: 1, name: "New to the UK?", path: "newtouk" },
+    { id: 2, name: "Car", path: "car" },
+    { id: 3, name: "Van", path: "van" },
+    { id: 4, name: "Car finance", path: "carfinance" },
+    { id: 5, name: "Our story", path: "ourstory" },
+    { id: 6, name: "Refer a friend", path: "referafriend" },
+    { id: 7, name: "Blog", path: "blog" },
+    { id: 8, name: "Help", path: "help" },
   ];
 
   return (
@@ -28,15 +30,16 @@ const NavBar = () => {
           className="text-2xl font-bold text-pink-500 cursor-pointer"
           whileHover={{ scale: 1.05 }}
         >
+        <a href="/">
          <img src={logo} alt="Company Logo" className="h-10 w-auto" />
-        </motion.div>
+        </a></motion.div>
 
         {/* Desktop Menu */}
         <div className="hidden lg:flex gap-6 text-neutral-800 font-medium">
           {menu.map((item, index) => (
             <motion.a
               key={item.id}
-              href={`#${item.name.toLowerCase().replace(/\s+/g, "-")}`}
+              href={item.path}
               className="hover:text-pink-500 transition-colors"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -54,6 +57,7 @@ const NavBar = () => {
             className="bg-neutral-300 hover:bg-neutral-400 px-6 py-2 rounded-full font-medium transition-colors"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            onClick={() => navigate('/claims')}
           >
             Claims
           </motion.button>
@@ -61,6 +65,7 @@ const NavBar = () => {
             className="bg-pink-500 hover:bg-pink-600 text-white px-6 py-2 rounded-full font-medium transition-colors"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            onClick={() => navigate('/getaquote')}
           >
             Get a Quote
           </motion.button>
@@ -103,6 +108,10 @@ const NavBar = () => {
                 className="bg-neutral-300 px-6 py-2 rounded-full font-medium"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={() => {
+                  navigate('/claims');
+                  setMenuOpen(false);
+                }}
               >
                 Claims
               </motion.button>
@@ -110,6 +119,10 @@ const NavBar = () => {
                 className="bg-pink-500 text-white px-6 py-2 rounded-full font-medium"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={() => {
+                  navigate('/getaquote');
+                  setMenuOpen(false);
+                }}
               >
                 Get a Quote
               </motion.button>
