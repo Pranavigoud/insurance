@@ -14,6 +14,7 @@ import { Route as ReferafriendRouteImport } from './routes/referafriend'
 import { Route as OurstoryRouteImport } from './routes/ourstory'
 import { Route as NewtoukRouteImport } from './routes/newtouk'
 import { Route as HelpRouteImport } from './routes/help'
+import { Route as GetaquoteRouteImport } from './routes/getaquote'
 import { Route as ClaimsRouteImport } from './routes/claims'
 import { Route as CarfinanceRouteImport } from './routes/carfinance'
 import { Route as CarRouteImport } from './routes/car'
@@ -43,6 +44,11 @@ const NewtoukRoute = NewtoukRouteImport.update({
 const HelpRoute = HelpRouteImport.update({
   id: '/help',
   path: '/help',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GetaquoteRoute = GetaquoteRouteImport.update({
+  id: '/getaquote',
+  path: '/getaquote',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ClaimsRoute = ClaimsRouteImport.update({
@@ -77,6 +83,7 @@ export interface FileRoutesByFullPath {
   '/car': typeof CarRoute
   '/carfinance': typeof CarfinanceRoute
   '/claims': typeof ClaimsRoute
+  '/getaquote': typeof GetaquoteRoute
   '/help': typeof HelpRoute
   '/newtouk': typeof NewtoukRoute
   '/ourstory': typeof OurstoryRoute
@@ -89,6 +96,7 @@ export interface FileRoutesByTo {
   '/car': typeof CarRoute
   '/carfinance': typeof CarfinanceRoute
   '/claims': typeof ClaimsRoute
+  '/getaquote': typeof GetaquoteRoute
   '/help': typeof HelpRoute
   '/newtouk': typeof NewtoukRoute
   '/ourstory': typeof OurstoryRoute
@@ -102,6 +110,7 @@ export interface FileRoutesById {
   '/car': typeof CarRoute
   '/carfinance': typeof CarfinanceRoute
   '/claims': typeof ClaimsRoute
+  '/getaquote': typeof GetaquoteRoute
   '/help': typeof HelpRoute
   '/newtouk': typeof NewtoukRoute
   '/ourstory': typeof OurstoryRoute
@@ -116,6 +125,7 @@ export interface FileRouteTypes {
     | '/car'
     | '/carfinance'
     | '/claims'
+    | '/getaquote'
     | '/help'
     | '/newtouk'
     | '/ourstory'
@@ -128,6 +138,7 @@ export interface FileRouteTypes {
     | '/car'
     | '/carfinance'
     | '/claims'
+    | '/getaquote'
     | '/help'
     | '/newtouk'
     | '/ourstory'
@@ -140,6 +151,7 @@ export interface FileRouteTypes {
     | '/car'
     | '/carfinance'
     | '/claims'
+    | '/getaquote'
     | '/help'
     | '/newtouk'
     | '/ourstory'
@@ -153,6 +165,7 @@ export interface RootRouteChildren {
   CarRoute: typeof CarRoute
   CarfinanceRoute: typeof CarfinanceRoute
   ClaimsRoute: typeof ClaimsRoute
+  GetaquoteRoute: typeof GetaquoteRoute
   HelpRoute: typeof HelpRoute
   NewtoukRoute: typeof NewtoukRoute
   OurstoryRoute: typeof OurstoryRoute
@@ -195,6 +208,13 @@ declare module '@tanstack/react-router' {
       path: '/help'
       fullPath: '/help'
       preLoaderRoute: typeof HelpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/getaquote': {
+      id: '/getaquote'
+      path: '/getaquote'
+      fullPath: '/getaquote'
+      preLoaderRoute: typeof GetaquoteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/claims': {
@@ -241,6 +261,7 @@ const rootRouteChildren: RootRouteChildren = {
   CarRoute: CarRoute,
   CarfinanceRoute: CarfinanceRoute,
   ClaimsRoute: ClaimsRoute,
+  GetaquoteRoute: GetaquoteRoute,
   HelpRoute: HelpRoute,
   NewtoukRoute: NewtoukRoute,
   OurstoryRoute: OurstoryRoute,

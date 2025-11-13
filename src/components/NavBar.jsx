@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from '../assets/logo.png';
 const NavBar = () => {
@@ -57,7 +57,7 @@ const NavBar = () => {
             className="bg-neutral-300 hover:bg-neutral-400 px-6 py-2 rounded-full font-medium transition-colors"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => navigate('/claims')}
+            onClick={() => navigate({ to: '/claims' })}
           >
             Claims
           </motion.button>
@@ -65,7 +65,7 @@ const NavBar = () => {
             className="bg-pink-500 hover:bg-pink-600 text-white px-6 py-2 rounded-full font-medium transition-colors"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => navigate('/getaquote')}
+            onClick={() => navigate({ to: '/getaquote' })}
           >
             Get a Quote
           </motion.button>
