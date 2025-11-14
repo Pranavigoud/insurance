@@ -46,6 +46,10 @@ export default function GetQuoteHero() {
     navigate({ to: '/' });
   };
 
+  const handleSearchByMakeModel = () => {
+    navigate({ to: '/vehicle-search' });
+  };
+
   return (
     <motion.section 
       className="w-full bg-gradient-to-b from-slate-100 to-white"
