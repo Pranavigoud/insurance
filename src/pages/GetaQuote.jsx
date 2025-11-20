@@ -38,6 +38,7 @@ const fetchVehicleDetails = async (plate) => {
 const STEPS = {
   SEARCH: 'search',
   DETAILS: 'details',
+    DATA_WRONG: 'dataWrong',
   VEHICLE_INFO: 'vehicleInfo',
   DRIVER_INFO: 'driverInfo',
   LICENSE: 'license',
@@ -79,8 +80,17 @@ const GetaQuote = () => {
       const res = await fetchVehicleDetails(plate);
       // API returns { success, source, data }
       const data = res && (res.data || res);
-      setVehicleData(data);
-      setStep(STEPS.DETAILS);
+      // Validate the returned data: ensure we have at least a plate/manufacturer/model
+      const hasIdentifier = data && (data.vrm || data.plate || data.manufacturer || data.model);
+      if (!hasIdentifier) {
+        // Mark as wrong data so user can retry or enter manually
+        setApiError('Vehicle lookup returned incomplete data.');
+        setVehicleData(null);
+        setStep(STEPS.DATA_WRONG);
+      } else {
+        setVehicleData(data);
+        setStep(STEPS.DETAILS);
+      }
     } catch (err) {
       setApiError(err.message || 'Could not find vehicle details. Please try again.');
     } finally {
@@ -224,22 +234,41 @@ const GetaQuote = () => {
   };
 
   const handlePaymentInfoSubmit = (info) => {
+    // Advance UI immediately to the quote page and show a provisional price.
+    const provisionalPrice = (Math.random() * (300 - 200) + 200).toFixed(2);
+    setQuotePrice(provisionalPrice);
+    setStep(STEPS.QUOTE);
+
     (async () => {
       setIsLoading(true);
       setApiError(null);
       try {
-        const qid = quoteId || quoteData.quoteId;
+        // Ensure we have a quote id. If the quote wasn't created earlier, create it now.
+        let qid = quoteId || quoteData.quoteId;
+        if (!qid) {
+          const createdRes = await quoteApi.start(vehicleData);
+          const created = createdRes && (createdRes.data || createdRes);
+          qid = (created && (created._id || created.id)) || null;
+          if (qid) {
+            setQuoteData(prev => ({ ...prev, quoteId: qid }));
+            setQuoteId(qid);
+            localStorage.setItem('quoteId', qid);
+          }
+        }
+
         if (!qid) throw new Error('No quote ID available');
+
         const res = await quoteApi.updateStep(qid, 'payment-info', info);
         const updated = res && (res.data || res);
         const finalData = { ...quoteData, paymentInfo: info, quote: updated };
         setQuoteData(finalData);
 
-        // Quote completed — show price (backend does not calculate price here, so keep UI random)
-        const randomPrice = (Math.random() * (300 - 200) + 200).toFixed(2);
-        setQuotePrice(randomPrice);
-        setStep(STEPS.QUOTE);
+        // If backend returns a price, update it
+        if (updated && (updated.price || updated.quotePrice)) {
+          setQuotePrice(updated.price || updated.quotePrice);
+        }
       } catch (err) {
+        console.error('Payment save failed or quote creation failed:', err);
         setApiError(err.message || 'Failed to save payment info');
       } finally {
         setIsLoading(false);
@@ -255,6 +284,7 @@ const GetaQuote = () => {
     STEPS.LICENSE,
     STEPS.HISTORY,
     STEPS.USAGE,
+    STEPS.PAYMENT
   ];
   
   // This is true only when the current step is one of the 5 above
@@ -300,6 +330,43 @@ const GetaQuote = () => {
             onChangeVehicle={handleChangeVehicle}
             onContinue={handleDetailsContinue}
           />
+        );
+      case STEPS.DATA_WRONG:
+        return (
+          <>
+            <QuoteHeader
+              activeStepId={getActiveStepId()}
+              showProgressBar={false}
+            />
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+              <React.Suspense fallback={<Spinner />}>
+                {/* Lazy render the data-wrong component inline to keep the page cohesive */}
+                <div className="min-h-[300px]">
+                  <div className="max-w-2xl mx-auto text-center py-20">
+                    <h1 className="text-4xl font-bold text-text-primary mb-6">We couldn't read that vehicle</h1>
+                    <p className="text-text-secondary mb-6">
+                      The vehicle details we retrieved look incomplete or incorrect. You can try again, enter the details manually, or contact support for help.
+                    </p>
+
+                    <div className="flex justify-center gap-4">
+                      <button
+                        onClick={() => { setVehicleData(null); setApiError(null); setStep(STEPS.SEARCH); }}
+                        className="bg-white border border-border-light py-3 px-6 rounded-full font-semibold hover:bg-gray-50"
+                      >
+                        Try again
+                      </button>
+                      <button
+                        onClick={() => setStep(STEPS.VEHICLE_INFO)}
+                        className="bg-accent-pink text-white py-3 px-6 rounded-full font-semibold hover:opacity-95"
+                      >
+                        Enter details manually
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </React.Suspense>
+            </div>
+          </>
         );
       case STEPS.VEHICLE_INFO:
         return (

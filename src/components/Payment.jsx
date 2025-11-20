@@ -32,10 +32,11 @@ const RadioCardDetailed = ({ name, value, label, description, checked, onChange 
   </label>
 );
 
-// Get today's and tomorrow's date
-const today = new Date('2025-11-17T12:00:00'); 
-const tomorrow = new Date(today);
-tomorrow.setDate(today.getDate() + 1);
+// Get today's and tomorrow's date (use current date so labels stay in sync)
+const baseDate = new Date();
+const today = new Date(baseDate);
+const tomorrow = new Date(baseDate);
+tomorrow.setDate(baseDate.getDate() + 1);
 
 const formatDate = (date) => {
   return date.toLocaleDateString('en-GB', {
@@ -49,11 +50,11 @@ const tomorrowString = `Tomorrow, ${formatDate(tomorrow)}`;
 
 // Function to get today's date in YYYY-MM-DD format
 const getTodayISO = () => {
-    const today = new Date('2025-11-17T12:00:00'); // Use hardcoded date
-    const year = today.getFullYear();
-    const month = (today.getMonth() + 1).toString().padStart(2, '0');
-    const day = today.getDate().toString().padStart(2, '0');
-    return `${year}-${month}-${day}`;
+  const d = new Date();
+  const year = d.getFullYear();
+  const month = (d.getMonth() + 1).toString().padStart(2, '0');
+  const day = d.getDate().toString().padStart(2, '0');
+  return `${year}-${month}-${day}`;
 };
 
 const Payment = ({ onSubmit, onBack, isLoading }) => {
