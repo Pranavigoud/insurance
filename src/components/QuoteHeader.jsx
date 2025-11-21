@@ -74,7 +74,7 @@ const QuoteHeader = ({ activeStepId, showProgressBar }) => {
   const activeIndex = steps.findIndex((s) => s.id === activeStepId);
 
   return (
-    <header className="bg-white py-6 px-4 sm:px-6 lg:px-8 border-b border-border-light">
+    <header className="bg-white py-3 sm:py-6 px-4 sm:px-6 lg:px-8 border-b border-border-light">
       <div className="max-w-4xl mx-auto">
         {/* Top part: Logo and Trustpilot */}
         <div className="flex items-center justify-between">
