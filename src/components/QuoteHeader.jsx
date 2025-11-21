@@ -25,9 +25,17 @@ const Step = ({ name, icon, isActive, isCompleted }) => {
   return (
     <div className="flex flex-col items-center w-12">
       <div
-        className={`w-8 h-8 rounded-full border-2 flex items-center justify-center mb-1 transition-all duration-300 ${iconClasses}`}
+        className={`relative w-8 h-8 rounded-full border-2 flex items-center justify-center mb-1 transition-all duration-300 ${iconClasses}`}
       >
-        {isCompleted ? '✓' : icon}
+        {/* always render the icon (emoji or glyph) so it doesn't disappear when completed */}
+        <span className="text-lg leading-none">{icon}</span>
+
+        {/* If completed, show a small check badge without removing the icon */}
+        {isCompleted && (
+          <span className="absolute -top-1 -right-1 inline-flex items-center justify-center w-4 h-4 rounded-full bg-brand-green text-white text-xs font-bold border-2 border-white">
+            ✓
+          </span>
+        )}
       </div>
       <span className={`text-xs text-center transition-all duration-300 ${textClasses}`}>{name}</span>
     </div>
