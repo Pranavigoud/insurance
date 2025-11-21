@@ -31,58 +31,50 @@ const FeatureList = () => {
   ]
 
   return (
-    <section className="bg-blue-50 py-12 sm:py-16 px-4 sm:px-6 md:px-12">
+    <section className="bg-white py-10 sm:py-14 px-4 sm:px-6 md:px-12">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
-          
-          {/* LEFT SIDE */}
-          <motion.div 
-            className="flex flex-col justify-center"
-            initial={{ opacity: 0, y: 30 }}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+
+          {/* LEFT: Heading */}
+          <motion.div
+            className="lg:col-span-1 flex flex-col justify-center"
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-green-700 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-green-600 to-teal-500 flex items-center justify-center shadow-md">
                 <FaArrowRight className="text-white text-base sm:text-lg" />
               </div>
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-tight text-gray-900 mb-3 sm:mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 mb-3">
               Built with you in mind
             </h2>
-            <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
-              The cover you need for wherever you're going. No matter where you started.
+            <p className="text-sm sm:text-base text-gray-600">
+              The cover you need for wherever you're going — flexible, fair and simple.
             </p>
           </motion.div>
 
-          {/* RIGHT SIDE - Features */}
-          <div className="space-y-6 sm:space-y-8">
+          {/* RIGHT: Feature cards */}
+          <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
             {features.map((feature, index) => (
-              <motion.div 
-                key={feature.id} 
-                className="flex gap-3 sm:gap-4"
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
+              <motion.div
+                key={feature.id}
+                className="bg-white border border-gray-100 rounded-xl p-5 shadow-sm hover:shadow-md transform hover:-translate-y-1 transition-all duration-200"
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.45, delay: index * 0.08 }}
               >
-                
-                {/* Numbered Circle */}
-                <div className="shrink-0">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-green-600 flex items-center justify-center">
-                    <span className="text-white font-black text-lg sm:text-xl">{feature.number}</span>
+                <div className="flex items-start gap-4">
+                  <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-r from-green-600 to-teal-500 text-white font-black text-lg">
+                    {feature.number}
                   </div>
-                </div>
-
-                {/* Content */}
-                <div className="flex-1">
-                  <h3 className="text-xl sm:text-2xl font-black text-gray-900 mb-1 sm:mb-2">
-                    {feature.title}
-                  </h3>
-                  <p className="text-gray-700 leading-relaxed text-sm sm:text-base">
-                    {feature.description}
-                  </p>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-bold text-gray-900 mb-1">{feature.title}</h3>
+                    <p className="text-sm text-gray-600 leading-relaxed">{feature.description}</p>
+                  </div>
                 </div>
               </motion.div>
             ))}
