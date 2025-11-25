@@ -9,23 +9,6 @@ const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
   const { openLoginModal } = useAuthModal();
-  const [activePath, setActivePath] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const p = window.location.pathname.replace(/^\//, '').replace(/\/$/, '');
-      return p === '' ? null : p;
-    }
-    return null;
-  });
-
-  // Update activePath when the history changes (back/forward)
-  React.useEffect(() => {
-    const onPop = () => {
-      const p = window.location.pathname.replace(/^\//, '').replace(/\/$/, '');
-      setActivePath(p === '' ? null : p);
-    };
-    window.addEventListener('popstate', onPop);
-    return () => window.removeEventListener('popstate', onPop);
-  }, []);
 
   const menu = [
     { id: 1, name: "New to the UK?", path: "newtouk" },
@@ -45,42 +28,38 @@ const NavBar = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="flex justify-between items-center h-20 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-screen-2xl mx-auto flex justify-between items-center h-20 px-4 sm:px-6 lg:px-8">
         {/* Logo with Image */}
         <motion.button
           type="button"
-          onClick={() => { navigate({ to: '/' }); setActivePath(null); }}
+          onClick={() => { navigate({ to: '/' }); }}
           className="flex items-center gap-2 cursor-pointer bg-transparent border-0"
           whileHover={{ scale: 1.05 }}
         >
-          <img src={logo} alt="Be Sure" className="h-12 w-auto object-contain" />
+          <img src={logo} alt="Be Sure" className="h-10 sm:h-12 md:h-14 lg:h-16 w-auto object-contain max-w-full" />
         </motion.button>
 
         {/* Desktop Menu */}
-        <div className="hidden lg:flex gap-8 text-white font-medium">
+        <div className="hidden lg:flex gap-6 md:gap-8 lg:gap-10 text-white font-medium text-sm md:text-base lg:text-lg">
           {menu.map((item, index) => (
             <motion.button
               key={item.id}
               type="button"
-              onClick={() => {
-                navigate({ to: `/${item.path}` });
-                setActivePath(item.path);
-              }}
-              className={`transition-colors relative group ${activePath === item.path ? 'underline underline-offset-4 decoration-2 text-blue-100' : 'hover:text-blue-100'}`}
+              onClick={() => navigate({ to: `/${item.path}` })}
+              className="transition-colors hover:text-blue-100"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.05, duration: 0.3 }}
             >
               {item.name}
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-100 group-hover:w-full transition-all duration-300"></span>
             </motion.button>
           ))}
         </div>
 
         {/* Buttons */}
-        <div className="hidden md:flex gap-4">
+        <div className="hidden md:flex gap-4 items-center">
           <motion.button 
-            className="bg-white/20 hover:bg-white/30 text-white px-6 py-2 rounded-full font-medium transition-colors border border-white/30"
+            className="bg-white/20 hover:bg-white/30 text-white px-3 sm:px-4 md:px-6 py-2 rounded-full font-medium transition-colors border border-white/30 text-sm md:text-base"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => navigate({ to: '/claims' })}
@@ -88,7 +67,7 @@ const NavBar = () => {
             Claims
           </motion.button>
           <motion.button 
-            className="bg-white hover:bg-gray-50 text-blue-600 px-6 py-2 rounded-full font-bold transition-colors shadow-md"
+            className="bg-white hover:bg-gray-50 text-blue-600 px-4 sm:px-6 py-2 rounded-full font-bold transition-colors shadow-md text-sm md:text-base"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => navigate({ to: '/getaquote' })}
@@ -123,8 +102,10 @@ const NavBar = () => {
 
         {/* Mobile Menu Toggle */}
         <div
-          className="lg:hidden cursor-pointer text-2xl text-white"
+          className="lg:hidden cursor-pointer text-2xl text-white p-2"
           onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle menu"
+          role="button"
         >
           {menuOpen ? "✖" : "☰"}
         </div>
@@ -147,9 +128,8 @@ const NavBar = () => {
                 onClick={() => {
                   navigate({ to: `/${item.path}` });
                   setMenuOpen(false);
-                  setActivePath(item.path);
                 }}
-                className={`text-white transition-colors ${activePath === item.path ? 'underline underline-offset-4 decoration-2 text-blue-100' : 'hover:text-blue-100'}`}
+                className="text-white transition-colors hover:text-blue-100"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.05 }}

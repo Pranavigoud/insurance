@@ -20,8 +20,8 @@ const VanInsuranceDetails = () => {
       <div className="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
 
       {/* Content Card - Centered */}
-      <div className="relative z-10 max-w-2xl mx-auto px-6 lg:px-8">
-        <div className="bg-gray-900/95 backdrop-blur rounded-2xl p-6 md:p-8 shadow-2xl">
+      <div className="relative z-10 max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-gray-900/95 backdrop-blur rounded-2xl p-6 md:p-8 shadow-2xl max-w-full">
           
           {/* Title */}
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-white mb-4 leading-tight">
@@ -42,7 +42,7 @@ const VanInsuranceDetails = () => {
           <button
             type="button"
             onClick={() => navigate({ to: '/getaquote' })}
-            className="bg-blue-400 hover:bg-blue-500 text-gray-900 font-bold px-6 py-2 rounded-full transition-colors duration-200 text-sm w-full md:w-auto"
+            className="bg-blue-400 hover:bg-blue-500 text-gray-900 font-bold px-4 sm:px-6 py-2 rounded-full transition-colors duration-200 text-sm w-full md:w-auto"
           >
             Get your cover now
           </button>

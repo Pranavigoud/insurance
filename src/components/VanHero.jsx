@@ -26,7 +26,7 @@ const VanHero = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-12 py-16">
+      <div className="relative z-10 max-w-screen-xl mx-auto w-full px-4 sm:px-6 lg:px-12 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           
           {/* Left Side - Empty for image prominence */}
@@ -49,7 +49,7 @@ const VanHero = () => {
             <button
               type="button"
               onClick={() => navigate({ to: '/getaquote' })}
-              className="bg-blue-400 hover:bg-blue-500 text-gray-900 font-bold px-12 py-3 rounded-full mb-10 transition-colors duration-200 text-lg w-full md:w-auto"
+              className="bg-blue-400 hover:bg-blue-500 text-gray-900 font-bold px-6 sm:px-8 md:px-12 py-3 rounded-full mb-10 transition-colors duration-200 text-lg w-full md:w-auto"
             >
               Get a quote
             </button>

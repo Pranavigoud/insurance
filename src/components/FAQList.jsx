@@ -8,17 +8,32 @@ const FAQList = () => {
     {
       id: 1,
       question: "Can you cover me if I'm not a UK resident?",
-      answer: "Yes, we can provide coverage for non-UK residents. Please contact us for more details about eligibility and requirements."
+      answer: "We define a UK resident as anyone who spends, or intends to spend, at least 183 days a year in the UK and has a permanent address here. We only offer insurance to UK residents.‍ Am I a UK resident?‍You are still considered a UK resident if you are:- new to the UK (and spend, or intend to spend, 183 days or more in the UK)- on a spouse visa (and spend, or intend to spend, 183 days or more in the UK)You must have, or be in the process of getting, a permanent address in the UK with the intention of settling here so that we can insure you.Remember, being a UK resident is not the same as being a UK citizen. You do not need to be a UK citizen to get insurance with us"
     },
     {
       id: 2,
       question: "Is car insurance different in the UK?",
-      answer: "Yes, car insurance in the UK has different requirements and coverage options compared to other countries. Our team can help you understand the differences."
+      answer: `Insurance works differently in every country.
+
+The most important thing to know about car insurance in the UK is that it is a legal requirement.
+If you own a car, you need to get it insured - whether you're driving it or not.
+
+Important things to remember
+
+- Car insurance is a legal requirement in the UK.
+
+- In the UK you insure the driver, not the car. So if you want anyone else to drive your car, you either need to add them as an additional driver on your policy, or make sure they have their own insurance to drive it (for example, temporary insurance).
+
+- Fully Comprehensive cover is the only level of cover in the UK that covers damage to you and your car as well as damage to others.
+
+- Third-party cover is the minimum legal requirement in the UK. This covers injury and damage to others, but not to you. So if you're hurt or your car is damaged, you would need to pay all the costs yourself. We do not offer third-party cover.
+
+- If you have an accident that is deemed to be your fault, you will need to contribute a small amount to your claim. This sum is called an excess. You will be told what your excess is when you get your quote, before you pay.`
     },
     {
       id: 3,
       question: "I didn't pass my test in the UK. Can I still get insured?",
-      answer: "Yes, we can provide insurance even if you passed your driving test outside the UK. We value your international driving experience."
+      answer: "Not yet, but we are working on it.We always do our best to be as clear as possible. But we know things are still easier in our own language.If you’re on our website, you can try using your web browser’s translator.1. Right-click anywhere on the screen 2. You should see an option to translate into your preferred language We can’t promise it will be any good, but might be worth a try!"
     },
     {
       id: 4,

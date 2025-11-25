@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import Hero from './components/Hero'
 import CustomerReview from './components/CustomerReview'
@@ -11,6 +11,9 @@ import PolicyInformation from './components/PolicyInformation'
 import Footer from './components/Footer'
 
 const App = () => {
+  useEffect(() => {
+    if (typeof window !== 'undefined') window.scrollTo(0, 0)
+  }, [])
   return (
     <div className="w-full overflow-x-hidden">
      
