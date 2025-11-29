@@ -28,25 +28,25 @@ const NavBar = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="max-w-screen-2xl mx-auto flex justify-between items-center h-20 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-screen-2xl mx-auto flex justify-between items-center h-16 px-2 sm:px-4 lg:px-6">
         {/* Logo with Image */}
         <motion.button
           type="button"
           onClick={() => { navigate({ to: '/' }); }}
-          className="flex items-center gap-2 cursor-pointer bg-transparent border-0"
+          className="flex items-center gap-2 cursor-pointer bg-transparent border-0 flex-shrink-0"
           whileHover={{ scale: 1.05 }}
         >
-          <img src={logo} alt="Be Sure" className="h-10 sm:h-12 md:h-14 lg:h-16 w-auto object-contain max-w-full" />
+          <img src={logo} alt="Be Sure" className="h-8 sm:h-10 md:h-12 w-auto object-contain max-w-full" />
         </motion.button>
 
         {/* Desktop Menu */}
-        <div className="hidden lg:flex gap-6 md:gap-8 lg:gap-10 text-white font-medium text-sm md:text-base lg:text-lg">
+        <div className="hidden lg:flex gap-2 xl:gap-4 text-white font-medium text-xs xl:text-sm">
           {menu.map((item, index) => (
             <motion.button
               key={item.id}
               type="button"
               onClick={() => navigate({ to: `/${item.path}` })}
-              className="transition-colors hover:text-blue-100"
+              className="transition-colors hover:text-blue-100 px-1 whitespace-nowrap"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.05, duration: 0.3 }}
@@ -57,9 +57,9 @@ const NavBar = () => {
         </div>
 
         {/* Buttons */}
-        <div className="hidden md:flex gap-4 items-center">
+        <div className="hidden md:flex gap-2 lg:gap-3 items-center flex-shrink-0">
           <motion.button 
-            className="bg-white/20 hover:bg-white/30 text-white px-3 sm:px-4 md:px-6 py-2 rounded-full font-medium transition-colors border border-white/30 text-sm md:text-base"
+            className="bg-white/20 hover:bg-white/30 text-white px-2 sm:px-3 py-1.5 rounded-full font-medium transition-colors border border-white/30 text-xs sm:text-sm whitespace-nowrap"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => navigate({ to: '/claims' })}
@@ -67,7 +67,7 @@ const NavBar = () => {
             Claims
           </motion.button>
           <motion.button 
-            className="bg-white hover:bg-gray-50 text-blue-600 px-4 sm:px-6 py-2 rounded-full font-bold transition-colors shadow-md text-sm md:text-base"
+            className="bg-white hover:bg-gray-50 text-blue-600 px-3 sm:px-4 py-1.5 rounded-full font-bold transition-colors shadow-md text-xs sm:text-sm whitespace-nowrap"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => navigate({ to: '/getaquote' })}
@@ -115,7 +115,7 @@ const NavBar = () => {
       <AnimatePresence>
         {menuOpen && (
           <motion.div 
-            className="lg:hidden bg-blue-700 flex flex-col items-center gap-4 py-6 text-white font-medium border-t border-blue-600"
+            className="lg:hidden bg-blue-700 flex flex-col items-center gap-2 py-4 text-white font-medium border-t border-blue-600"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
@@ -129,7 +129,7 @@ const NavBar = () => {
                   navigate({ to: `/${item.path}` });
                   setMenuOpen(false);
                 }}
-                className="text-white transition-colors hover:text-blue-100"
+                className="text-white transition-colors hover:text-blue-100 text-sm"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.05 }}
@@ -137,9 +137,9 @@ const NavBar = () => {
                 {item.name}
               </motion.button>
             ))}
-            <div className="flex flex-col gap-3 mt-4 w-full px-8">
+            <div className="flex flex-col gap-2 mt-2 w-full px-4">
               <motion.button 
-                className="bg-white/20 hover:bg-white/30 text-white border border-white/30 px-6 py-2 rounded-full font-medium w-full"
+                className="bg-white/20 hover:bg-white/30 text-white border border-white/30 px-4 py-1.5 rounded-full font-medium w-full text-sm"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => {
@@ -150,7 +150,7 @@ const NavBar = () => {
                 Claims
               </motion.button>
               <motion.button 
-                className="bg-white hover:bg-gray-50 text-blue-600 px-6 py-2 rounded-full font-medium w-full"
+                className="bg-white hover:bg-gray-50 text-blue-600 px-4 py-1.5 rounded-full font-medium w-full text-sm"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => {
